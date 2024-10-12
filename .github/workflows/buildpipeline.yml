@@ -40,4 +40,5 @@ jobs:
         run: |
           sed -i 's/{{IMAGE_TAG}}/${{ github.sha }}/g' app-deployment.yaml
 
+
       
