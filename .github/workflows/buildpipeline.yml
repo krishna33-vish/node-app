@@ -39,6 +39,8 @@ jobs:
       - name: Replace image tag in Kubernetes manifest
         run: |
           sed -i 's/{{IMAGE_TAG}}/${{ github.sha }}/g' app-deployment.yml
-
+      
+      - name: Show manifest after replacement
+        run: cat app-deployment.yml
 
       
