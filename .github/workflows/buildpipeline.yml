@@ -36,4 +36,8 @@ jobs:
         run: |
           docker push krishna33gaikwad/node-mysql-curd-app:${{ github.sha }}
 
+      - name: Replace image tag in Kubernetes manifest
+        run: |
+          sed -i 's/{{IMAGE_TAG}}/${{ github.sha }}/g' k8s/app-deployment.yaml
+
       
