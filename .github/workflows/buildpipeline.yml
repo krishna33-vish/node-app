@@ -24,7 +24,7 @@ jobs:
      
       - name: Build Docker image
         run: |
-          docker build -t krishna33gaikwad/node-mysql-curd-appe:${{ github.sha }} .
+          docker build -t krishna33gaikwad/node-mysql-curd-app:${{ github.sha }} .
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
