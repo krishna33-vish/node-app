@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>E-Commerce Application</h1>
+        
+        <div class="form-container">
+            <h2>Add New Product</h2>
+            <form id="productForm">
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter product name" required>
+                
+                <label for="price">Price ($):</label>
+                <input type="number" id="price" name="price" placeholder="Enter product price" required>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" placeholder="Enter product description" required></textarea>
+
+                <button type="submit">Add Product</button>
+            </form>
+            <div class="message" id="message"></div>
+        </div>
+
+        <h2>Product List</h2>
+        <div id="productList"></div>
+    </div>
+
+    <script>
+        // Fetch and display products
+        function fetchProducts() {
+            fetch('/products')
+                .then(response => response.json())
+                .then(products => {
+                    const productList = document.getElementById('productList');
+                    productList.innerHTML = ''; // Clear previous products
+                    if (products.length === 0) {
+                        productList.innerHTML = '<p>No products available. Add some!</p>';
+                    } else {
+                        products.forEach(product => {
+                            const productDiv = document.createElement('div');
+                            productDiv.className = 'product';
+                            productDiv.innerHTML = `
+                                <h3>${product.name}</h3>
+                                <p>Price: $${product.price}</p>
+                                <p>${product.description}</p>
+                                <button onclick="deleteProduct(${product.id})">Delete</button>
+                            `;
+                            productList.appendChild(productDiv);
+                        });
+                    }
+                })
+                .catch(error => console.error('Error fetching products:', error));
+        }
+
+        // Add a new product
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const price = document.getElementById('price').value;
+            const description = document.getElementById('description').value;
+
+            fetch('/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, price, description }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Product added:', data);
+                document.getElementById('message').innerText = 'Product added successfully!';
+                document.getElementById('message').style.color = '#27ae60';
+                document.getElementById('productForm').reset(); // Clear the form fields
+                fetchProducts(); // Refresh the product list
+            })
+            .catch((error) => {
+                console.error('Error adding product:', error);
+                document.getElementById('message').innerText = 'Error adding product';
+                document.getElementById('message').style.color = '#e74c3c';
+            });
+        });
+
+        // Delete a product
+        function deleteProduct(id) {
+            fetch(`/products/${id}`, {
+                method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Product deleted:', data);
+                fetchProducts(); // Refresh the product list
+            })
+            .catch(error => console.error('Error deleting product:', error));
+        }
+
+        // Initial fetch of products
+        fetchProducts();
+    </script>
+</body>
+</html>
