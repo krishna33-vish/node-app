@@ -26,6 +26,7 @@ db.connect((err) => {
     console.log('Connected to MySQL database');
 });
 
+
 // Routes for CRUD operations
 
 // Create a new product
