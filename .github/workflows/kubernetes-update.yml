@@ -4,7 +4,7 @@ name: Update Kubernetes Manifest
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
 
 jobs:
