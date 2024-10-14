@@ -1,6 +1,6 @@
 name: Update Kubernetes Manifest
 
-# Trigger the workflow on push to the main branch or manual dispatch
+# Trigger the workflow on push to the master branch or manual dispatch
 on:
   push:
     branches:
@@ -32,5 +32,15 @@ jobs:
           ./update-k8s-manifest.sh $IMAGE_NAME $IMAGE_TAG
 
       - name: Push changes back to the repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git push
+          # Set the remote URL to use the GITHUB_TOKEN for authentication
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/krishna33-vish/node-app.git
+
+          # Add and commit the changes
+          git add .
+          git commit -m "Auto-update Kubernetes manifest with new image tag"
+
+          # Push the changes back to the repository
+          git push origin master
