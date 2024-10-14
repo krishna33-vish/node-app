@@ -30,7 +30,7 @@ jobs:
           chmod +x ./scripts/update-k8s-manifest.sh
           
           # Run the script (make sure to pass arguments if needed)
-          ./scripts/update-k8s-manifest.sh $IMAGE_NAME $IMAGE_TAG
+          ./update-k8s-manifest.sh $IMAGE_NAME $IMAGE_TAG
 
       - name: Push changes back to the repository
         run: |
