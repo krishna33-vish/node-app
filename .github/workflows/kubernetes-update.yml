@@ -27,7 +27,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           # Make the script executable
-          chmod +x ./scripts/update-k8s-manifest.sh
+          chmod +x ./update-k8s-manifest.sh
           
           # Run the script (make sure to pass arguments if needed)
           ./update-k8s-manifest.sh $IMAGE_NAME $IMAGE_TAG
