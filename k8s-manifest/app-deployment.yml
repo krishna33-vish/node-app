@@ -35,10 +35,11 @@ kind: Service
 metadata:
   name: node-app-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: node-app
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
+      nodePort: 30008  # You can specify any available port between 30000 and 32767
