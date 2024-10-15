@@ -38,8 +38,8 @@ jobs:
 
       - name: Update Kubernetes Manifests
         run: |
-          sed -i "s|image:.*|image: krishna33gaikwad/node-mysql-curd-app:${{ github.sha }}|g" app-deployment.yml
-          git add app-deployment.yml
+          sed -i "s|image:.*|image: krishna33gaikwad/node-mysql-curd-app:${{ github.sha }}|g" /k8s-manifest/app-deployment.yml
+          git add /k8s-manifest/app-deployment.yml
           git commit -m "Update image tag to ${{ github.sha }}"
 
       - name: Push changes back to the repository
