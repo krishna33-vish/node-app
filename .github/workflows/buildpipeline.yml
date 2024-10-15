@@ -31,12 +31,19 @@ jobs:
           docker build -t $IMAGE_NAME:$IMAGE_TAG .
           docker push $IMAGE_NAME:$IMAGE_TAG
 
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Update Kubernetes Manifests
         run: |
           sed -i "s|image:.*|image: krishna33gaikwad/node-mysql-curd-app:${{ github.sha }}|g" app-deployment.yml
           git add app-deployment.yml
           git commit -m "Update image tag to ${{ github.sha }}"
-          git push
+
+      - name: Push changes back to the repository
+        run: git push
 
       - name: ArgoCD Sync (Trigger Deployment)
         run: |
