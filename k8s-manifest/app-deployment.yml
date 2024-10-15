@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: node-app
-          image: krishna33gaikwad/node-mysql-curd-app:d6f308d4c9d06576fe3a8a0d8dd24fc5998810e0
+          image: krishna33gaikwad/node-mysql-curd-app:b5bebb01465e345fd6f41c5b019b1b61c14f88f9
           ports:
             - containerPort: 3000
           env:
