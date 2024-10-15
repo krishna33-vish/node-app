@@ -49,4 +49,4 @@ jobs:
       - name: ArgoCD Sync (Trigger Deployment)
         run: |
           curl -k -H "Authorization: Bearer ${{ secrets.ARGOCD_AUTH_TOKEN }}" \
-          -X POST "http://10.108.241.137:80/api/v1/applications/node-app/sync" 
+          -X POST "http://10.108.241.137:4444/api/v1/applications/node-app/sync" 
