@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: node-app
-          image: krishna33gaikwad/node-mysql-curd-app:08bdc8eef3007ddc2106656d098e05d5f217cefd
+          image: krishna33gaikwad/node-mysql-curd-app:b960c7a70b88c7d8954410f0f197b76df1333965
           ports:
             - containerPort: 3000
           env:
@@ -35,13 +35,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: node-app-service
-  namespace: argocd  # Namespace added
+  namespace: argocd
 spec:
-  type: ClusterIP  # Changed to ClusterIP
+  type: NodePort
   selector:
     app: node-app
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
+      nodePort: 30080
 
