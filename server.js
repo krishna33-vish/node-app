@@ -39,6 +39,9 @@ app.post('/products', (req, res) => {
     });
 });
 
+
+
+
 // Read all products
 app.get('/products', (req, res) => {
     db.query('SELECT * FROM products', (err, results) => {
