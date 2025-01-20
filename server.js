@@ -11,7 +11,7 @@ app.use(express.static('public'));
 
 // MySQL database connection
 const db = mysql.createConnection({
-    host: 'db',
+    host: 'mysql-service',
     user: 'root',
     password: 'password',  // Update with your MySQL password
     database: 'testdb'
