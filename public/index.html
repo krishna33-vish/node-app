@@ -47,7 +47,7 @@
                                 <h3>${product.name}</h3>
                                 <p>Price: $${product.price}</p>
                                 <p>${product.description}</p>
-                                <button onclick="deleteProduct(${product.id})">Delete</button>
+                                <button onclick="deleteProduct('${product._id}')">Delete</button>
                             `;
                             productList.appendChild(productDiv);
                         });
