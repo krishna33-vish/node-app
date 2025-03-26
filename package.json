@@ -1,9 +1,10 @@
 {
-  "name": "mysql-curd",
+  "name": "mongodb-crud",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +13,6 @@
   "dependencies": {
     "body-parser": "^1.20.3",
     "express": "^4.21.1",
-    "mysql2": "^3.11.3"
+    "mongoose": "^7.8.6"
   }
 }

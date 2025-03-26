@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: node-app-deployment
-  namespace: argocd  # Added namespace
+  namespace: argocd
 spec:
   replicas: 2
   selector:
@@ -15,21 +15,12 @@ spec:
     spec:
       containers:
         - name: node-app
-          image: krishna33gaikwad/node-mysql-curd-app:b3c1ed3590fc32f15ec9acebd70437cf99cba898
+          image: krishna33gaikwad/node-mongodb-crud-app:latest
           ports:
             - containerPort: 3000
           env:
-            - name: MYSQL_HOST
-              value: "mysql-service"
-            - name: MYSQL_USER
-              value: "root"
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: password
-            - name: MYSQL_DB
-              value: "testdb"
+            - name: MONGO_URI
+              value: "mongodb://mongo-service:27017/testdb"
 ---
 apiVersion: v1
 kind: Service
@@ -45,4 +36,3 @@ spec:
       port: 80
       targetPort: 3000
       nodePort: 30080
-
